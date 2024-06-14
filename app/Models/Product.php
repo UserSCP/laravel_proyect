@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    protected $fillable=
-    [
-        'id','name','price'
-    ];
+    protected $fillable = ['name', 'price', 'description', 'stock'];
+
+    public static function stockOptions()
+    {
+        return [
+            'sin stock' => 'Sin Stock',
+            'poco stock' => 'Poco Stock',
+            'en stock' => 'En Stock',
+        ];
+    }
 }

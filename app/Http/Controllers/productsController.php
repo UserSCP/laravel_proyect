@@ -21,28 +21,32 @@ class ProductsController extends Controller
 
     public function store(StoreProductRequest $request)
     {
+        $request->validated();
         Product::create([
-            'name' => $request->name,
-            'price' => $request->price,
+            'name' => $request['name'],
+            'price' => $request['price'],
+            'description' => $request->input('description')??'Sin descripcion',
+            'stock' => $request->input('stock'),
         ]);
+
         return redirect()->route('products.index')->with('success', 'Producto creado');
     }
 
-    public function edit(Product $p)
+    public function edit(Product $product)
     {
         return view('products.edit', compact('product'));
     }
-
     public function update(Request $request, Product $p)
     {
         $request->validate([
             'name' => 'required|string|max:100',
             'price' => 'required|numeric',
+            'description'=> 'nullable|string|max:100',
+            'stock' => 'required|in:sin stock,poco stock,en stock',
+
         ]);
-        $product->update([
-            'name' => $request->name,
-            'price' => $request->price,
-        ]);
+        
+        $p->update($request->all());
         return redirect()->route('products.index')->with('success', 'Producto actualizado');
     }
 

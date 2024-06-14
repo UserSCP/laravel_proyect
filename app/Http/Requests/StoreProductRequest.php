@@ -24,7 +24,9 @@ class StoreProductRequest extends FormRequest
         return
         [
         'name'=>'required|string|max:100',
-        'price'=>'required|numeric',    
+        'price'=>'required|numeric',
+        'description' => 'nullable|string|max:255', 
+        'stock' => 'required|in:sin stock,poco stock,en stock',
         ];
     }
 }

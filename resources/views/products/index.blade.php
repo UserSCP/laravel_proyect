@@ -15,6 +15,8 @@
             <th>ID</th>
             <th>Nombre</th>
             <th>Precio</th>
+            <th>Descripcion</th>
+            <th>stock</th>
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
@@ -24,6 +26,8 @@
             <th>{{$product->id}}</th>
             <th>{{$product->name}}</th>
             <th>{{$product->price}}</th>
+            <th>{{$product->description}}</th>
+            <th>{{$product->stock}}</th>
             <th>
                 <a href="{{route('products.edit',$product)}}">
 
