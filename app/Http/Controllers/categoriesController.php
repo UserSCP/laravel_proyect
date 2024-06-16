@@ -11,7 +11,9 @@ class CategoriesController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index', ['categories' => $categories]);
+        $route = route('categories.index'); 
+
+        return view('categories.index', compact('categories', 'route'));
     }
 
 

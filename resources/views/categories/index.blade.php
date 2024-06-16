@@ -1,8 +1,10 @@
 @extends('layouts.layout')
+@section('bottun','Subir Prodcuto')
 @section('title', 'Tabla Categorias')
+
 @section('content')
-    @include('components.table', ['route' => route('categories.create')])
-    @component('components.table')
+    @component('components.table', ['route' => route('categories.create')])
+    @slot('components.table')
         @foreach ($categories as $categorie)
             <tr>
                 <td>{{ $categorie->id }}</td>

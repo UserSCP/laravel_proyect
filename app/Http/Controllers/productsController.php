@@ -11,8 +11,10 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('products.index', compact('products'));
+        $route = route('products.create'); 
+        return view('products.index', compact('products', 'route'));
     }
+    
 
     public function create()
     {
@@ -21,12 +23,12 @@ class ProductsController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        $request->validated();
+        $validated = $request->validated();
+
         Product::create([
-            'name' => $request['name'],
-            'price' => $request['price'],
-            'description' => $request->input('description')??'Sin descripcion',
-            //'stock' => $request->input('stock'),
+            'name' => $validated['name'],
+            'price' => $validated['price'],
+            'description' => $request->input('description', 'Sin descripción')
         ]);
 
         return redirect()->route('products.index')->with('success', 'Producto creado');
@@ -36,17 +38,17 @@ class ProductsController extends Controller
     {
         return view('products.edit', compact('product'));
     }
-    public function update(Request $request, Product $p)
+
+    public function update(Request $request, Product $product)
     {
-        $request->validate([
+        $validated = $request->validate([
             'name' => 'required|string|max:100',
             'price' => 'required|numeric',
-            'description'=> 'nullable|string|max:100',
-           // 'stock' => 'required|in:sin stock,poco stock,en stock',
-
+            'description' => 'nullable|string|max:100',
         ]);
-        
-        $p->update($request->all());
+
+        $product->update($validated);
+
         return redirect()->route('products.index')->with('success', 'Producto actualizado');
     }
 
