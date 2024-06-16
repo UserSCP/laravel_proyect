@@ -26,7 +26,7 @@ class ProductsController extends Controller
             'name' => $request['name'],
             'price' => $request['price'],
             'description' => $request->input('description')??'Sin descripcion',
-            'stock' => $request->input('stock'),
+            //'stock' => $request->input('stock'),
         ]);
 
         return redirect()->route('products.index')->with('success', 'Producto creado');
@@ -42,7 +42,7 @@ class ProductsController extends Controller
             'name' => 'required|string|max:100',
             'price' => 'required|numeric',
             'description'=> 'nullable|string|max:100',
-            'stock' => 'required|in:sin stock,poco stock,en stock',
+           // 'stock' => 'required|in:sin stock,poco stock,en stock',
 
         ]);
         
