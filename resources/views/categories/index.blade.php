@@ -8,7 +8,7 @@
         @foreach ($categories as $categorie)
             <tr>
                 <td>{{ $categorie->id }}</td>
-                <td>{{ $categorie->id_parent }}</td>
+                <td>{{ $categorie->parent_id }}</td>
                 <td>{{ $categorie->name }}</td>
                 <td>
                     <a href="{{ route('categories.edit', $categorie) }}">

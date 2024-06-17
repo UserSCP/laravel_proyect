@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\ProductRequest;
 
 class ProductsController extends Controller
 {
@@ -21,7 +21,7 @@ class ProductsController extends Controller
         return view('products.create');
     }
 
-    public function store(StoreProductRequest $request)
+    public function store(ProductRequest $request)
     {
         $validated = $request->validated();
 

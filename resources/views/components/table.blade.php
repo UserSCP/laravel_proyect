@@ -15,7 +15,7 @@
         <tr>
             <th>ID</th>
             @if ($route == route('categories.create'))
-                <th>Id_Parent</th>
+                <th>Parent_id</th>
             @endif
             <th>Name</th>
             @if ($route == route('products.create'))

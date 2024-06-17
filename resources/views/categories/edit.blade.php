@@ -1,5 +1,12 @@
-@extends('loyouts.loyout')
-@content('title','Editar Categorias')
+@extends('layouts.layout')
+
+@section('title', 'Editar Categoria')
+
 @section('content')
-@include('components.form',['route'=>route('categories.edit',$categorie), 'object'=>$categorie])
+    @component('components.form', [
+        'route' => route('categories.update', $category),
+        'title' => 'Editar Categoria',
+        'object' => $category
+    ])
+    @endcomponent
 @endsection
