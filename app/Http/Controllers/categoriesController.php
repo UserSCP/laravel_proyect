@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-use app\Http\Requests\StoreCategoryRequest;
+use app\Http\Requests\CategoryRequest;
 
 class CategoriesController extends Controller
 {
@@ -22,31 +22,28 @@ class CategoriesController extends Controller
         return view('categories.create');
     }
 
-    public function store(StoreCategoryRequest $request)
+    public function store(CategoryRequest $request)
     {
-        $request->validated();
-        Category::create([
-            'parent_id' => $request->parent_id,
-            'name' => $request->name,
-        ]);
+        $validated = $request->validated();
+        Category::create(['id_parent'=>$validated['id_parent'],'name' => $validated['name'],]) ;       
 
-        return redirect()->route('categories.index')->with('success', 'Categoria creada');
+        return redirect()->route('products.index')->with('success', 'categoria creado');
+    
+    }
+
+    public function update(CategoryRequest $request, Category $category)
+    {
+        $validated = $request->validated();
+        $category->update($validated);
+
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     public function edit(Category $c)
     {
         return view('categories.edit', compact('category'));
     }
-    public function update(Request $request, Category $c)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-        ]);
-        
-        $c->update($request->all());
-        return redirect()->route('categories.index')->with('success', 'Categoria actualizada');
-    }
-
+    
     public function destroy(Category $c)
     {
         $c->delete();

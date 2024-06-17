@@ -20,7 +20,6 @@
             <th>Name</th>
             @if ($route == route('products.create'))
                 <th>Price</th>
-                <th>Description</th>
             @endif
             <th>Editar</th>
             <th>Eliminar</th>

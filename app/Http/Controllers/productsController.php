@@ -28,7 +28,7 @@ class ProductsController extends Controller
         Product::create([
             'name' => $validated['name'],
             'price' => $validated['price'],
-            'description' => $request->input('description', 'Sin descripción')
+            // 'description' => $request->input('description', 'Sin descripción')
         ]);
 
         return redirect()->route('products.index')->with('success', 'Producto creado');
@@ -44,7 +44,7 @@ class ProductsController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:100',
             'price' => 'required|numeric',
-            'description' => 'nullable|string|max:100',
+            // // 'description' => 'nullable|string|max:100',
         ]);
 
         $product->update($validated);

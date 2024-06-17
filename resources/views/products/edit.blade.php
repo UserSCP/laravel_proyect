@@ -1,5 +1,12 @@
-@extends('loyouts.loyout')
-@content('title','Editar Productos')
+@extends('layouts.layout')
+
+@section('title', 'Editar Producto')
+
 @section('content')
-@include('components.form',['route'=>route('products.edit',$product), 'object'=>$product])
+    @component('components.form', [
+        'route' => route('products.update', $product),
+        'title' => 'Editar Producto',
+        'object' => $product
+    ])
+    @endcomponent
 @endsection

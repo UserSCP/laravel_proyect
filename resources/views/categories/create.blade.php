@@ -1,5 +1,12 @@
-@extends('layouts.loyout')
-@section('title','Subir Categorias')
+
+@extends('layouts.layout')
+
+@section('title', 'Crear Categoria')
+
 @section('content')
-@include('components.form',['route'=>route('categories.store')])
+    @component('components.form', [
+        'route' => route('categories.store'),
+        'title' => 'Crear Categoria'
+    ])
+    @endcomponent
 @endsection
