@@ -16,4 +16,11 @@ class BrandRequest extends FormRequest
             'name' => 'required|string|max:255',
         ];
     }
+    // public function messages()
+    // {
+    //     return [
+    //         'name.required' => __('validation.required', ['attribute' => 'nombre']),
+    //         'name.string'=>__('validation',['attribute'=>'nombre'])
+    //     ];
+    // }
 }

@@ -30,6 +30,9 @@
                 <input type="text" name="parent_id" class="form-control @error('parent_id') is-invalid @enderror"
                     placeholder="Id Parent"
                     value="{{ old('parent_id') ?? (isset($object) ? $object->parent_id : '') }}">
+                    @error('parent_id')
+            <div class="invalid-feedback">{{ $message }}</div>
+        @enderror
             @endif
             <br>
             <label for="fname">Name</label>

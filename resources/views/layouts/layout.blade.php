@@ -20,7 +20,8 @@
     @include('layouts.header')
     @yield('content')
     @include('layouts.footer')
-
+    {{-- <script src="{{ asset('js/json.js') }}"></script>
+    @stack('scripts') --}}
 </body>
 
 </html>

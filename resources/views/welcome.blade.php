@@ -25,6 +25,9 @@
         @endif
     </div>
     @include('layouts.footer')
+    {{-- <script src="{{ asset('js/app.js') }}"></script>
+    <!-- Aquí se incluirán los scripts específicos -->
+    @stack('scripts') --}}
 </body>
 
 </html>

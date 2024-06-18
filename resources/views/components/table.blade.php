@@ -1,4 +1,4 @@
-
+<br>
 <a href="{{ $route }}"><button class="button button1">@yield('bottun')</button></a>
 <h3>
 @yield('title')

@@ -6,24 +6,27 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CategoryRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
+    public function authorize()
     {
-        return true;
+        return true; // Puedes definir aquí la lógica de autorización si es necesario
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
-     */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'parent_id'=>'nullable|numeric',
-            'name'=>'required|string|max:255',
+            'name' => 'required|string|max:100',
+            // Otros campos y reglas de validación necesarios
         ];
     }
+
+    // public function messages()
+    // {
+    //     return [
+    //         'name.required' => __('required', ['attribute' => __('nombre')]),
+    //         'name.string' => __('string', ['attribute' => __('nombre')]),
+    //         'name.max' => __('max.string', ['attribute' => __('nombre'), 'max' => 100]),
+    //         'parent_id.integer' => __('integer', ['attribute' => __('parent_id')]),
+    //         // Puedes personalizar más mensajes de validación aquí según necesites
+    //     ];
+    // }
 }
