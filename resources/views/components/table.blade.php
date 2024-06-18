@@ -31,7 +31,7 @@
 <div class="container">
     <div class="alert6">
         <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        {{ session('edit') }}
+        {{ session('error') }}
     </div>
 </div>
 @endif
