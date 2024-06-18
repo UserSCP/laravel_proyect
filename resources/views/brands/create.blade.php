@@ -9,3 +9,8 @@
     ])
     @endcomponent
 @endsection
+@push('styles')
+    @php
+        $useFormsStyles = true;
+    @endphp
+@endpush

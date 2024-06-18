@@ -12,17 +12,22 @@
                 <td>{{ $categorie->name }}</td>
                 <td>
                     <a href="{{ route('categories.edit', $categorie) }}">
-                        <button class="btn btn-success">Editar</button>
+                        <button class="button button2">Editar</button>
                     </a>
                 </td>
                 <td>
                     <form action="{{ route('categories.destroy', $categorie) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button type="submit" class="button button3">Eliminar</button>
                     </form>
                 </td>
             </tr>
         @endforeach
     @endcomponent
 @endsection
+@push('styles')
+    @php
+        $useTablesStyles = true;
+    @endphp
+@endpush

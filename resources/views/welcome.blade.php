@@ -5,7 +5,9 @@
     <title>Bienvenido</title>
     
 <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
-<link href="{{ asset('css/table.css') }}" rel="stylesheet">
+<link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
+<link href="{{ asset('css/footer.css') }}" rel="stylesheet">
+
 </head>
 <body>
     @include('layouts.header')

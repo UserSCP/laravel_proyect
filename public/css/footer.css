@@ -1,0 +1,28 @@
+/* diseño del footer */
+footer {
+    margin-top: auto;
+    background-color: #04AA6D;
+    position: fixed; 
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .d-flex {
+    display: flex;
+  }
+  p{
+    text-align: center;
+    color: white;
+  
+  }
+  .flex-column {
+    flex-direction: column;
+  }
+  
+  .min-vh-100 {
+    min-height: 100vh;
+  }
+  
+  .flex-grow-1 {
+    flex-grow: 1;
+  }

@@ -10,16 +10,21 @@
                 <td>{{ $brand->id }}</td>
                 <td>{{ $brand->name }}</td>
                 <td>
-                    <a href="{{ route('brands.edit', $brand) }}" class="btn btn-success">Editar</a>
+                    <a href="{{ route('brands.edit', $brand) }}" ><button class="button button2">Editar</button></a>
                 </td>
                 <td>
                     <form action="{{ route('brands.destroy', $brand) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                        <button type="submit"class="button button3" >Eliminar</button>
                     </form>
                 </td>
             </tr>
         @endforeach
     @endcomponent
 @endsection
+@push('styles')
+    @php
+        $useTablesStyles = true;
+    @endphp
+@endpush
