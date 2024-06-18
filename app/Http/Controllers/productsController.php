@@ -31,7 +31,7 @@ class ProductsController extends Controller
             // 'description' => $request->input('description', 'Sin descripción')
         ]);
 
-        return redirect()->route('products.index')->with('success', 'Producto creado');
+        return redirect()->route('products.index')->with('create', 'Producto creado');
     }
 
     public function edit(Product $product)
@@ -49,12 +49,12 @@ class ProductsController extends Controller
 
         $product->update($validated);
 
-        return redirect()->route('products.index')->with('success', 'Producto actualizado');
+        return redirect()->route('products.index')->with('edit', 'Producto actualizado');
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'Producto eliminado');
+        return redirect()->route('products.index')->with('delete', 'Producto eliminado');
     }
 }

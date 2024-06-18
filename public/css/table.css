@@ -1,5 +1,6 @@
+/* diseño para la tabla(la tabla, columnas, filas) */
 .table {
-    
+
     border-collapse: collapse;
     width: 100%;
 }

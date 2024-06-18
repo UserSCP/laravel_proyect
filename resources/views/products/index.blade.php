@@ -10,7 +10,6 @@
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->price }}</td>
-                {{-- <td>{{ $product->description }}</td> --}}
                 <td>
                     <a href="{{ route('products.edit', $product) }}" ><button class="button button2">Editar</button></a>
                 </td>

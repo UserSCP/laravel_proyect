@@ -26,7 +26,7 @@ class BrandController extends Controller
         Brand::create([
             'name' => $validated['name'],
         ]);
-        return redirect()->route('brands.index')->with('success', 'Marca creada');
+        return redirect()->route('brands.index')->with('create', 'Marca creada');
     }
 
     public function edit(Brand $brand)
@@ -38,12 +38,12 @@ class BrandController extends Controller
     {
         $validated = $request->validated();  // Usa 'validated()' en lugar de 'validate()'
         $brand->update($validated);
-        return redirect()->route('brands.index')->with('success', 'Marca actualizada');
+        return redirect()->route('brands.index')->with('edit', 'Marca actualizada');
     }
 
     public function destroy(Brand $brand)
     {
         $brand->delete();
-        return redirect()->route('brands.index')->with('success', 'Marca eliminada');
+        return redirect()->route('brands.index')->with('delete', 'Marca eliminada');
     }
 }

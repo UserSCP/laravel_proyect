@@ -1,3 +1,4 @@
+/* diseño de formu */
 input[type=text], select {
     width: 100%;
     padding: 12px 20px;
@@ -13,5 +14,45 @@ input[type=text], select {
     background-color: #f2f2f2;
     padding: 5px 25px 25px 25px ;
     max-width: 750px;
-    margin: 0 auto; /* Centra el div horizontalmente */
+    margin: 0 auto; 
 }
+/* diseño de alert de formu */
+.alert4 {
+    padding: 20px;
+    background-color: white; 
+    color: rgb(0, 0, 0); 
+    border: 2px solid #f44336;
+    max-width: 775px;
+    margin: 0 auto; 
+
+  }
+  .alert4:hover
+  {
+    background-color: #f44336;
+    color: white;
+  }
+  /* .alert4 {
+    padding: 20px;
+    border: 2px solid #f44336;
+    background-color: #f44336;
+    color: white;
+    max-width: 775px;
+    margin: 0 auto; 
+
+  } */
+ 
+  .closebtn {
+    margin-left: 15px;
+    color: black;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .closebtn:hover {
+    color: white;
+
+  }

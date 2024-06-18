@@ -53,3 +53,60 @@ html,body {
   background-color: #f44336;
   color: white;
 }
+/* diseño de alert exito de las acciones de subisa, idicion y eliminaciones */
+.alert1 {
+  padding: 20px;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  border: 2px solid #f44336;
+  max-width: 775px;
+
+}
+.alert1:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.alert2 {
+  padding: 20px;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  border: 2px solid #04AA6D;
+  max-width: 775px;
+
+}
+
+.alert2:hover {
+  background-color: #04AA6D;
+  color: white;
+}
+
+.alert3 {
+  padding: 20px;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  border: 2px solid #008CBA;
+  max-width: 775px;
+
+}
+
+.alert3:hover {
+  background-color: #008CBA;
+  color: white;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: black;
+  font-weight: bold;
+  float: right;
+  font-size: 22px;
+  line-height: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: white;
+
+}
