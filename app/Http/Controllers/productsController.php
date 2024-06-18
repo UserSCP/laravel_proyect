@@ -5,17 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Http\Requests\ProductRequest;
+use Exception;
+use Exeception;
 
 class ProductsController extends Controller
 {
     public function index()
     {
-        $products = Product::all();
-        $route = route('products.create'); 
-        return view('products.index', compact('products', 'route'));
+        try {
+            $products = Product::all();
+            $route = route('products.create');
+            return view('products.index', compact('products', 'route'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Error al cargar los productos: ' . $e->getMessage());
+        }
     }
-    
-
     public function create()
     {
         return view('products.create');
@@ -23,38 +27,48 @@ class ProductsController extends Controller
 
     public function store(ProductRequest $request)
     {
-        $validated = $request->validated();
-
-        Product::create([
-            'name' => $validated['name'],
-            'price' => $validated['price'],
-            // 'description' => $request->input('description', 'Sin descripción')
-        ]);
-
-        return redirect()->route('products.index')->with('create', 'Producto creado');
+        try {
+            $validated = $request->validated();
+            Product::create([
+                'name' => $validated['name'],
+                'price' => $validated['price'],
+            ]);
+            return redirect()->route('products.index')->with('create', 'Producto creado');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Error al crear el producto: ' . $e->getMessage());
+        }
     }
 
     public function edit(Product $product)
     {
-        return view('products.edit', compact('product'));
+        try {
+            return view('products.edit', compact('product'));
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Error al cargar los productos: ' . $e->getMessage());
+        }
     }
 
     public function update(Request $request, Product $product)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:100',
-            'price' => 'required|numeric',
-            // // 'description' => 'nullable|string|max:100',
-        ]);
-
-        $product->update($validated);
-
-        return redirect()->route('products.index')->with('edit', 'Producto actualizado');
+        try {
+            $validated = $request->validate([
+                'name' => 'required|string|max:100',
+                'price' => 'required|numeric',
+            ]);
+            $product->update($validated);
+            return redirect()->route('products.index')->with('edit', 'Producto actualizado');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Error al actualizar el producto: ' . $e->getMessage());
+        }
     }
 
     public function destroy(Product $product)
     {
-        $product->delete();
-        return redirect()->route('products.index')->with('delete', 'Producto eliminado');
+        try {
+            $product->delete();
+            return redirect()->route('products.index')->with('delete', 'Producto eliminado');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Error al eliminar el producto: ' . $e->getMessage());
+        }
     }
 }

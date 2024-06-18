@@ -27,6 +27,14 @@
     </div>
 </div>
 @endif
+@if (session('error'))
+<div class="container">
+    <div class="alert6">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        {{ session('edit') }}
+    </div>
+</div>
+@endif
 <br>
 <table class="table">
     <thead>
