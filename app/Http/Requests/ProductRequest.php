@@ -27,14 +27,6 @@ class ProductRequest extends FormRequest
         'price'=>'required|numeric',
         ];
     }
-    // public function messages()
-    // {
-    //     return [
-    //         'name.required' => __('validation.required', ['attribute' => 'nombre']),
-    //         'name.string' => __('validation.string', ['attribute' => 'nombre']),
-    //         'name.max' => __('validation.max.string', ['attribute' => 'nombre', 'max' => 100]),
-    //         'price.required'=>__('validation.requires',['attribute'=>'precio']),
-    //         'price.integer' => __('validation.integer', ['attribute' => 'precio']),
-    //     ];
-    // }
+
+
 }

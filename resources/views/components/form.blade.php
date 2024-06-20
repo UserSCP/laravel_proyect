@@ -3,17 +3,15 @@
 @endphp
 <h2 style="text-align: center">{{ $title }}</h2>
 @if ($errors->any())
-<div class="container">
-    
-            @foreach ($errors->all() as $error)
+    <div class="container">
+        @foreach ($errors->all() as $error)
             <div class="alert4">
-            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-            {{ $error }}
-        </div><br>
-            @endforeach
-        
-    
-</div>
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                {{ $error }}
+            </div>
+            <br>
+        @endforeach
+    </div>
 @endif
 
 <div class="container">
