@@ -25,7 +25,5 @@
     @endcomponent
 @endsection
 @push('styles')
-    @php
-        $useTablesStyles = true;
-    @endphp
+<link href="{{ asset('css/table.css') }}" rel="stylesheet">
 @endpush

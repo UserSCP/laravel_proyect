@@ -11,7 +11,5 @@
     @endcomponent
 @endsection
 @push('styles')
-    @php
-        $useFormsStyles = true;
-    @endphp
+<link href="{{ asset('css/form.css') }}" rel="stylesheet">
 @endpush

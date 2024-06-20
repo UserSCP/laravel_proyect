@@ -94,14 +94,7 @@ html,body {
   background-color: #008CBA;
   color: white;
 }
-.alert6 {
-  padding: 20px;
-  background-color: white;
-  color: rgb(0, 0, 0);
-  border: 2px solid #000000;
-  max-width: 775px;
 
-}
 
 .closebtn {
   margin-left: 15px;
@@ -116,5 +109,13 @@ html,body {
 
 .closebtn:hover {
   color: white;
+
+}
+.alert6 {
+  padding: 20px;
+  background-color: white;
+  color: rgb(0, 0, 0);
+  border: 2px solid #000000;
+  max-width: 775px;
 
 }
