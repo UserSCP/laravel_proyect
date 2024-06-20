@@ -16,7 +16,7 @@
 
 <div class="container">
     <div class="div">
-        <form action="{{ $route }}" method="POST">
+        <form action="{{ $route }}" method="POST" class="form">
             @csrf
             @if (isset($object))
                 @method('PUT')
@@ -24,13 +24,18 @@
 
             <br>
             @if (Str::contains(Route::currentRouteName(), 'categories'))
-                <label for="fname">Parent_ID</label>
-                <input type="text" name="parent_id" class="form-control @error('parent_id') is-invalid @enderror"
-                    placeholder="Id Parent"
-                    value="{{ old('parent_id') ?? (isset($object) ? $object->parent_id : '') }}">
-                    @error('parent_id')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
+            <label for="parent_id">Parent Category</label>
+            <select name="parent_id" class="form-control @error('parent_id') is-invalid @enderror">
+                <option value="">Select Parent Category</option>
+                @foreach (App\models\Category::all() as $category)
+                    <option value="{{ $category->id }}" {{ (old('parent_id') == $category->id || (isset($object) && $object->parent_id == $category->id)) ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+            @error('parent_id')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
             @endif
             <br>
             <label for="fname">Name</label>
@@ -42,7 +47,6 @@
 
                 <input type="text" name="price" class="form-control @error('price') is-invalid @enderror"
                     placeholder="Price" value="{{ old('price') ?? (isset($object) ? $object->price : '') }}">
-                {{-- <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" placeholder="Description" value="{{ old('description') ?? (isset($object) ? $object->description : '') }}"> --}}
             @endif
             <br>
             <input type="submit" class="button button1" value="Submit">

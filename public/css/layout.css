@@ -124,3 +124,6 @@ html,body {
   background-color: rgba(0, 0, 0, 0.774);
   color: white
 }
+.is-invalid {
+  border-color: #dc3545;
+}

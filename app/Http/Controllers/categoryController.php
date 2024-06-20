@@ -26,9 +26,20 @@ class categoryController extends Controller
     public function store(CategoryRequest $request)
     {
         try{
-        Category::create($request->validated());
-        return redirect()->route('categories.index')->with('create',__('messages.category.created'));
-        }catch (Exception $e) {
+            $validatedData = $request->validated();
+        
+        // Verificar si el parent_id es válido
+        if ($validatedData['parent_id'] != null) {
+            $parentCategory = Category::find($validatedData['parent_id']);
+            if (!$parentCategory) {
+                return redirect()->back()->withInput()->withErrors(['parent_id' => 'Parent category not found.']);
+            }
+        }
+
+        Category::create($validatedData);
+        
+        return redirect()->route('categories.index')->with('create', __('messages.category.created'));
+    }catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.category.create_error',['error'=>$e->getMessage()]));
         }
     }
