@@ -65,10 +65,11 @@ class ProductsController extends Controller
     public function destroy(Product $product)
     {
         try {
-            $product->deelete();
+            $product->delete();
             return redirect()->route('products.index')->with('delete', __('messages.product.deleted'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.product.delete_error',['error'=>$e->getMessage()]));
+            
         }
     }
 }
