@@ -1,40 +1,60 @@
 <br>
 <a href="{{ $route }}"><button class="button button1">@yield('bottun')</button></a>
 <h3>
-@yield('title')
+    @yield('title')
 </h3>
-@if (session('delete'))
-<div class="container">
-    <div class="alert1">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        {{ session('delete') }}
+@php
+    $alerts = [
+        'delete' => 'alert1',
+        'edit' => 'alert3',
+        'create' => 'alert2',
+        'error' => 'alert6',
+    ];
+@endphp
+
+@foreach ($alerts as $key => $alertClass)
+    @if (session($key))
+        <div class="container">
+            <div class="{{ $alertClass }}">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                {{ session($key) }}
+            </div>
+        </div>
+    @endif
+@endforeach
+
+{{-- @if (session('delete'))
+    <div class="container">
+        <div class="alert1">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{ session('delete') }}
+        </div>
     </div>
-</div>
 @endif
 @if (session('create'))
-<div class="container">
-    <div class="alert2">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        {{ session('create') }}
+    <div class="container">
+        <div class="alert2">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{ session('create') }}
+        </div>
     </div>
-</div>
 @endif
 @if (session('edit'))
-<div class="container">
-    <div class="alert3">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        {{ session('edit') }}
+    <div class="container">
+        <div class="alert3">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{ session('edit') }}
+        </div>
     </div>
-</div>
 @endif
 @if (session('error'))
-<div class="container">
-    <div class="alert6">
-        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
-        {{ session('error') }}
+    <div class="container">
+        <div class="alert6">
+            <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+            {{ session('error') }}
+        </div>
     </div>
-</div>
-@endif
+@endif --}}
 <br>
 <table class="table">
     <thead>

@@ -16,7 +16,7 @@ class BrandController extends Controller
             $route = route('brands.create');
             return view('brands.index', compact('brands', 'route'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al cargar las marcas: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.brand.load_error', ['error' => $e->getMessage()]));
         }
     }
 
@@ -32,9 +32,9 @@ class BrandController extends Controller
             Brand::create([
                 'name' => $validated['name'],
             ]);
-            return redirect()->route('brands.index')->with('create', 'Marca creada');
+            return redirect()->route('brands.index')->with('create', __('messages.brand.created'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al crear la marca: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.brand.create_error',['error'=>$e->getMessage()]));
         }
     }
 
@@ -43,18 +43,18 @@ class BrandController extends Controller
         try{
         return view('brands.edit', compact('brand'));
         }catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al cargar las marcas: ' . $e->getMessage());
+            return redirect()->back()->with('error',__('messages.brand.load_error',['error'=>$e->getMessage()]));
         }
     }
 
     public function update(BrandRequest $request, Brand $brand)
     {
         try{
-        $validated = $request->validated();  // Usa 'validated()' en lugar de 'validate()'
+        $validated = $request->validated();  
         $brand->update($validated);
-        return redirect()->route('brands.index')->with('edit', 'Marca actualizada');
+        return redirect()->route('brands.index')->with('edit',__('messages.brand.updated'));
         }catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al actualizar la marca: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.brand.update_error',['error'=>$e->getMessage()]));
         }
     }
 
@@ -62,9 +62,9 @@ class BrandController extends Controller
     {
         try{
         $brand->delete();
-        return redirect()->route('brands.index')->with('delete', 'Marca eliminada');
+        return redirect()->route('brands.index')->with('delete', __('messages.brand.deleted'));
         }catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al eliminar la marca: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.brand.delete_error',['error'=>$e->getMessage()]));
         }
     }
 }

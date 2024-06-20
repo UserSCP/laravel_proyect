@@ -17,7 +17,7 @@ class ProductsController extends Controller
             $route = route('products.create');
             return view('products.index', compact('products', 'route'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al cargar los productos: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.product.load_error',['error'=>$e->getMessage()]));
         }
     }
     public function create()
@@ -33,9 +33,9 @@ class ProductsController extends Controller
                 'name' => $validated['name'],
                 'price' => $validated['price'],
             ]);
-            return redirect()->route('products.index')->with('create', 'Producto creado');
+            return redirect()->route('products.index')->with('create', __('messages.product.created'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al crear el producto: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.product.create_error',['error'=>$e->getMessage()]));
         }
     }
 
@@ -44,7 +44,7 @@ class ProductsController extends Controller
         try {
             return view('products.edit', compact('product'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al cargar los productos: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.product.load_error',['error'=>$e->getMessage()]));
         }
     }
 
@@ -56,19 +56,19 @@ class ProductsController extends Controller
                 'price' => 'required|numeric',
             ]);
             $product->update($validated);
-            return redirect()->route('products.index')->with('edit', 'Producto actualizado');
+            return redirect()->route('products.index')->with('edit', __('messages.product.updated'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al actualizar el producto: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.product.update_error',['error'=>$e->getMessage()]));
         }
     }
 
     public function destroy(Product $product)
     {
         try {
-            $product->delete();
-            return redirect()->route('products.index')->with('delete', 'Producto eliminado');
+            $product->deelete();
+            return redirect()->route('products.index')->with('delete', __('messages.product.deleted'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al eliminar el producto: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.product.delete_error',['error'=>$e->getMessage()]));
         }
     }
 }

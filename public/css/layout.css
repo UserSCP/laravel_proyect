@@ -111,11 +111,16 @@ html,body {
   color: white;
 
 }
+
 .alert6 {
   padding: 20px;
   background-color: white;
-  color: rgb(0, 0, 0);
-  border: 2px solid #000000;
+  color: rgba(0, 0, 0, 0.774);
+  border: 2px solid rgba(0, 0, 0, 0.774);
   max-width: 775px;
 
+}
+.alert6:hover{
+  background-color: rgba(0, 0, 0, 0.774);
+  color: white
 }

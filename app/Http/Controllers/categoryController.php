@@ -16,7 +16,7 @@ class categoryController extends Controller
         $route=route('categories.create');
         return view('categories.index', compact('categories','route'));
         } catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al cargar las caegorias: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.category.load_error',['error'=>$e->getMessage()]));
         }
     }
     public function create()
@@ -27,9 +27,9 @@ class categoryController extends Controller
     {
         try{
         Category::create($request->validated());
-        return redirect()->route('categories.index')->with('create', 'Categoría creada con éxito');
+        return redirect()->route('categories.index')->with('create',__('messages.category.created'));
         }catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al crear la categoria: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.category.create_error',['error'=>$e->getMessage()]));
         }
     }
 
@@ -37,9 +37,9 @@ class categoryController extends Controller
     {
         try{
         $category->update($request->validated());
-        return redirect()->route('categories.index')->with('edit', 'Categoría actualizada con éxito');
+        return redirect()->route('categories.index')->with('edit',__('messages.category.updated'));
         }catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al actualizar la categoria: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.category.update_error',['error'=>$e->getMessage()]));
         }
     }
     
@@ -48,7 +48,7 @@ class categoryController extends Controller
         try{
         return view('categories.edit', compact('category'));
         }catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al cargar las caegorias: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.category.load_error',['error'=>$e->getMessage()]));
         }
     }
     
@@ -56,9 +56,9 @@ class categoryController extends Controller
     {
         try{
         $category->delete();
-        return redirect()->route('categories.index')->with('delete','Categoria eliminada');
+        return redirect()->route('categories.index')->with('delete',__('messages.category.deleted'));
         }catch (Exception $e) {
-            return redirect()->back()->with('error', 'Error al eliminar la categoria: ' . $e->getMessage());
+            return redirect()->back()->with('error', __('messages.brand.delete_error',['error'=>$e->getMessage()]));
         }
     }
 }
