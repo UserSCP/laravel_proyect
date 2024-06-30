@@ -271,5 +271,7 @@ return [
         'username'                 => 'usuario',
         'value'                    => 'valor',
         'year'                     => 'año',
+        'parent_id' => 'categoria',
     ],
+
 ];

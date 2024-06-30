@@ -2,12 +2,22 @@
 
 @section('title', 'Crear Marca')
 
+@php
+    $fields = [
+        [
+            'type' => 'text',
+            'name' => 'name',
+            'placeholder' => __('fields.name.placeholder'),
+            'label' => __('fields.name.label')
+        ],
+    ];
+@endphp
 @section('content')
-    @component('components.form', [
-        'route' => route('brands.store'),
-        'title' => 'Crear Marca'
-    ])
-    @endcomponent
+<x-form 
+    :route="route('brands.store')" 
+    title="Crear Marca"
+    :fields="$fields"
+/>
 @endsection
 @push('styles')
 <link href="{{ asset('css/form.css') }}" rel="stylesheet">
