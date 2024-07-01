@@ -25,6 +25,9 @@ class ProductRequest extends FormRequest
         [
         'name'=>'required|string|max:100',
         'price'=>'required|numeric',
+        'brand_id'=>'required|exists:brands,id',
+        'categories' => 'array',
+            'categories.*' => 'exists:categories,id'
         ];
     }
 

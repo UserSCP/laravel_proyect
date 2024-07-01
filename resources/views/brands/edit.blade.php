@@ -1,25 +1,11 @@
 @extends('layouts.layout')
 
-@section('title', 'Editar Marca')
+@section('title', 'Actualizar Marca')
 
-@php
-    $fields = [
-        [
-            'type' => 'text',
-            'name' => 'name',
-            'placeholder' => __('fields.name.placeholder'),
-            'label' => __('fields.name.label')
-        ],
-    ];
-@endphp
-
-<x-form 
-    :route="route('brands.update', $brand)" 
-    title="Editar Marca"
-    :fields="$fields"
-    :object="$brand"
-/>
+@section('content')
+    <x-form :route="route('brands.update', $brand)" title="Actualizar Marca" :fields="$fields" :object="$brand"/>
+@endsection
 
 @push('styles')
-<link href="{{ asset('css/form.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/form.css') }}" rel="stylesheet">
 @endpush

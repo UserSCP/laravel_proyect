@@ -35,24 +35,17 @@ class Product extends Model
 		'price' => 'int'
 	];
 
-	protected $fillable = [
-		'name',
-		'price',
-		'state'
-	];
-
-	public function categories()
-	{
-		return $this->belongsToMany(Category::class)
-					->withPivot('id')
-					->withTimestamps();
-	}
-	// public static function stockOptions()
-    // {
-    //     return [
-    //         'sin stock' => 'Sin Stock',
-    //         'poco stock' => 'Poco Stock',
-    //        // 'en stock' => 'En Stock',
-    //     ];
-    // }
+	protected $fillable = ['name', 'price', 'brand_id', 'category_names'];
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'product_category');
+    }
+	public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
+	public function getCategoryNamesAttribute()
+    {
+        return $this->categories->pluck('name')->implode(' - ');
+    }
 }

@@ -16,4 +16,12 @@ return [
         'placeholder' => 'Choisir une catégorie
         '
     ],
+    'brand' => [
+        'label' => 'Marque',
+        'placeholder' => 'Sélectionner la marque'
+    ],
+    'prod_uctcategory' => [
+        'label' => 'Catégorie',
+        'placeholder' => 'Sélectionner une catégorie'
+    ],
 ];

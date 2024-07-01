@@ -15,7 +15,10 @@ class Category extends Model
         'parent_id',
         'name'
     ];
-
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_category');
+    }
     public function children()
     {
         return $this->hasMany(Category::class, 'parent_id');
@@ -24,12 +27,5 @@ class Category extends Model
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id');
-    }
-
-    public function products()
-    {
-        return $this->belongsToMany(Product::class)
-                    ->withPivot('id')
-                    ->withTimestamps();
     }
 }

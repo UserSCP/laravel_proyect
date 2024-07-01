@@ -6,7 +6,7 @@
     <div class="container">
         @foreach ($errors->all() as $error)
             <div class="alert4">
-                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
                 {{ $error }}
             </div>
             <br>
@@ -21,38 +21,43 @@
             @if (isset($object))
                 @method('PUT')
             @endif
-
             @foreach ($fields as $field)
-                @if (isset($field['name']) && isset($field['label']) && isset($field['type']))
-                    @if ($field['type'] == 'select')
-                        <label for="{{ $field['name'] }}">{{ $field['label'] }}</label>
-                        <select name="{{ $field['name'] }}"
-                            class="form-control @error($field['name']) is-invalid @enderror">
-                            @foreach ($field['options'] as $optionValue => $optionName)
-                                <option value="{{ $optionValue }}"
+                @if ($field['type'] == 'text')
+                    <label for="{{ $field['name'] }}">{{ $field['label'] }}</label>
+                    <input type="text" name="{{ $field['name'] }}"
+                           class="form-control @error($field['name']) is-invalid @enderror"
+                           value="{{ old($field['name'], $object->{$field['name']} ?? '') }}">
+                    @error($field['name'])
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                @elseif ($field['type'] == 'select')
+                    <label for="{{ $field['name'] }}">{{ $field['label'] }}</label>
+                    <select name="{{ $field['name'] }}" class="form-control @error($field['name']) is-invalid @enderror">
+                        @foreach ($field['options'] as $optionValue => $optionName)
+                            <option value="{{ $optionValue }}"
                                     {{ old($field['name'], $object->{$field['name']} ?? '') == $optionValue ? 'selected' : '' }}>
-                                    {{ $optionName }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error($field['name'])
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-
-                    @elseif ($field['type'] == 'text')
-                        <label for="{{ $field['name'] }}">{{ $field['label'] }}</label>
-                        <input type="text" name="{{ $field['name'] }}"
-                            class="form-control @error($field['name']) is-invalid @enderror"
-                            placeholder="{{ $field['placeholder'] }}"
-                            value="{{ old($field['name'], $object->{$field['name']} ?? '') }}">
-                        @error($field['name'])
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    @endif
-                    <br>
+                                {{ $optionName }}
+                            </option>
+                        @endforeach
+                    </select>
+                    @error($field['name'])
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                @elseif ($field['type'] == 'checkbox-group')
+                    <label>{{ $field['label'] }}</label>
+                    <div>
+                        @foreach ($field['options'] as $optionValue => $optionName)
+                            <input type="checkbox" name="{{ $field['name'] }}[]" value="{{ $optionValue }}"
+                                {{ in_array($optionValue, old($field['name'], $object->{$field['name']} ?? [])) ? 'checked' : '' }}>
+                            <label>{{ $optionName }}</label>
+                        @endforeach
+                    </div>
+                    @error($field['name'])
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 @endif
+                <br>
             @endforeach
-
             <input type="submit" class="button button1" value="Submit">
         </form>
     </div>
