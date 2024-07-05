@@ -15,4 +15,12 @@ return [
         'placeholder' => '
         カテゴリを選んでください'
     ],
+    'brand'=>[
+        'label'=>'ブランド',
+        'placeholder'=>'ブランドを選択'
+    ],
+    'product_category'=>[
+        'label'=>'カテゴリ',
+        'placeholder'=>'カテゴリーを選択'
+    ],
 ];

@@ -20,13 +20,15 @@ class ProductRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
-        return
-        [
-        'name'=>'required|string|max:100',
-        'price'=>'required|numeric',
-        ];
-    }
+{
+    return [
+        'name' => 'required|string|max:100',
+        'price' => 'required|numeric',
+        'brand_id' => 'required|exists:brands,id',
+        'categories' => 'array',
+        'categories.*' => 'exists:categories,id'
+    ];
+}
 
 
 }

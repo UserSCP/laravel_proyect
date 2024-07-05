@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use Exception;
-
+use App\Traits\FormFieldsTrait;
 class categoryController extends Controller
 {
+    use FormFieldsTrait;
     public function index()
     {
         try{
@@ -21,15 +21,14 @@ class categoryController extends Controller
     }
     public function create()
     {
-        return view('categories.create');
+        $fields= $this->getFormFields(['name','category']);
+        return view('categories.create',compact('fields'));
     }
     public function store(CategoryRequest $request)
     {
         try{
             $validatedData = $request->validated();
-        
-        // Verificar si el parent_id es válido
-        if ($validatedData['parent_id'] != null) {
+                if ($validatedData['parent_id'] != null) {
             $parentCategory = Category::find($validatedData['parent_id']);
             if (!$parentCategory) {
                 return redirect()->back()->withInput()->withErrors(['parent_id' => 'Parent category not found.']);
@@ -57,7 +56,8 @@ class categoryController extends Controller
     public function edit(Category $category)
     {
         try{
-        return view('categories.edit', compact('category'));
+            $fields= $this->getFormFields(['name','category']);
+        return view('categories.edit', compact('category','fields'));
         }catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.category.load_error',['error'=>$e->getMessage()]));
         }

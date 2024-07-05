@@ -1,15 +1,16 @@
 <?php
-
 use App\Http\Controllers\CategoryController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\BrandController;
+use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {return view('welcome');})->name('home');
-Route::resource('products', ProductsController::class);
-Route::resource('categories', CategoryController::class);
-Route::resource('brands', BrandController::class);
-Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
-Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+
+Route::resource('products', ProductsController::class)->except(['show']);
+Route::resource('categories', CategoryController::class)->except(['show']);
+Route::resource('brands', BrandController::class)->except(['show']);
+
 
 

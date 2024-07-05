@@ -13,4 +13,12 @@ return [
         'label' => 'Category',
         'placeholder' => 'Select Category'
     ],
+    'brand'=>[
+        'label'=>'Brand',
+        'placeholder'=>'Select Brand'
+    ],
+    'product_category'=>[
+        'label'=>'Category',
+        'placeholder'=>'Select Category'
+    ],
 ];

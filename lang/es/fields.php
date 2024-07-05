@@ -15,4 +15,12 @@ return [
         'label' => 'Categoría',
         'placeholder' => 'Seleccione Categoría'
     ],
+    'brand'=>[
+        'label'=>'Marca',
+        'placeholder'=>'Selecione Marca'
+    ],
+    'product_category'=>[
+        'label'=>'Categoria',
+        'placeholder'=>'Selecione Categoria'
+    ],
 ];
