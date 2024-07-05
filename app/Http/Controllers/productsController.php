@@ -31,26 +31,49 @@ class ProductsController extends Controller
     }
 
     public function store(ProductRequest $request)
-    {
-        try {
-            $validated = $request->validate([
-                'name' => 'required|string|max:100',
-                'price' => 'required|numeric',
-                'brand_id' => 'required|exists:brands,id',
-                'categories' => 'array',
-                'categories.*' => 'exists:categories,id'
-            ]);
+{
+    try {
+        $validated = $request->validated();
 
-            $product = Product::create($validated);
-            $product->categories()->sync($request->input('categories', []));
-            $product->save();
+        $product = Product::create([
+            'name' => $validated['name'],
+            'price' => $validated['price'],
+            'brand_id' => $validated['brand_id'],
+        ]);
 
-            return redirect()->route('products.index')->with('create', __('messages.product.created'));
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', __('messages.product.create_error', ['error' => $e->getMessage()]));
-        }
+        // Sincroniza las categorías
+        $product->categories()->sync($request->input('categories', []));
+        $product->save();
+
+        return redirect()->route('products.index')->with('create', __('messages.product.created'));
+    } catch (Exception $e) {
+        return redirect()->back()->with('error', __('messages.product.create_error', ['error' => $e->getMessage()]));
     }
+}
 
+public function update(ProductRequest $request, Product $product)
+{
+    try {
+        $validated = $request->validated();
+
+        $product->update([
+            'name' => $validated['name'],
+            'price' => $validated['price'],
+            'brand_id' => $validated['brand_id'],
+        ]);
+
+        // Sincroniza las categorías
+        $product->categories()->sync($request->input('categories', []));
+        $product->save();
+
+        return redirect()->route('products.index')->with('edit', __('messages.product.updated'));
+    } catch (Exception $e) {
+        return redirect()->back()->with('error', __('messages.product.update_error', ['error' => $e->getMessage()]));
+    }
+}
+
+
+    
     public function edit(Product $product)
     {
         try {
@@ -58,27 +81,6 @@ class ProductsController extends Controller
             return view('products.edit', compact('product', 'fields'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.product.load_error', ['error' => $e->getMessage()]));
-        }
-    }
-
-    public function update(ProductRequest $request, Product $product)
-    {
-        try {
-            $validated = $request->validate([
-                'name' => 'required|string|max:100',
-                'price' => 'required|numeric',
-                'brand_id' => 'required|exists:brands,id',
-                'categories' => 'array',
-                'categories.*' => 'exists:categories,id'
-            ]);
-
-            $product->update($validated);
-            $product->categories()->sync($request->input('categories', []));
-            $product->save();
-
-            return redirect()->route('products.index')->with('edit', __('messages.product.updated'));
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', __('messages.product.update_error', ['error' => $e->getMessage()]));
         }
     }
 

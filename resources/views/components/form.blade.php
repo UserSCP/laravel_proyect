@@ -47,19 +47,18 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
 
-                @elseif ($field['type'] == 'checkbox-group')
+                @elseif ($field['type'] == 'checkbox-group'&&isset($object))
                     <label>{{ $field['label'] }}</label>
-                    <div>
-                        @foreach ($field['options'] as $optionValue => $optionName)
-                            <input type="checkbox" name="{{ $field['name'] }}[]" value="{{ $optionValue }}"
-                                {{ in_array($optionValue, old($field['name'], $object ? $object->categories->pluck('id')->toArray() : [])) ? 'checked' : '' }}
-                                id="{{ $field['name'] . '_' . $optionValue }}">
-                            <label for="{{ $field['name'] . '_' . $optionValue }}">{{ $optionName }}</label>
-                        @endforeach
-                    </div>
-                    @error($field['name'])
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    @foreach($field['options'] as $value => $label)
+                        <input type="checkbox" name="categories[]" value="{{ $value }}" {{ in_array($value, $object->categories->pluck('id')->toArray()) ? 'checked' : '' }}> {{ $label }}
+                    @endforeach
+                @elseif ($field['type'] == 'checkbox-group'&& !isset($object))
+                <label>{{ $field['label'] }}</label>
+                @foreach($field['options'] as $value => $label)
+                    <input type="checkbox" name="{{ $field['name'] }}[]" value="{{ $value }}" 
+                        {{ in_array($value, old($field['name'], $object->{$field['name']}->pluck('id')->toArray() ?? [])) ? 'checked' : '' }}> 
+                    {{ $label }}
+                @endforeach
                 @endif
                 <br>
             @endforeach

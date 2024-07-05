@@ -39,15 +39,15 @@ trait FormFieldsTrait
                 ];
                 break;
 
-            case 'categories':
-                $categories = Category::all()->pluck('name', 'id');
-                $formFields[] = [
-                    'type' => 'checkbox-group',
-                    'name' => 'categories',
-                    'label' => 'Categories',
-                    'options' => $categories
-                ];
-                break;
+                case 'categories':
+                    $categories = Category::all()->pluck('name', 'id');
+                    $formFields[] = [
+                        'type' => 'checkbox-group',
+                        'name' => 'categories[]',
+                        'label' => 'Categories',
+                        'options' => $categories
+                    ];
+                    break;
         }
     }
 

@@ -11,7 +11,6 @@
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->price }}</td>
                 <td>{{ $product->brand_id }}</td>
-                <td>{{ $product->category_names }}</td>
                 <td>
                     <a href="{{ route('products.edit', $product) }}" ><button class="button button2">Editar</button></a>
                 </td>
