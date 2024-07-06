@@ -31,6 +31,7 @@ trait FormFieldsTrait
 
             case 'brand_id':
                 $brands = Brand::all()->pluck('name', 'id');
+                $brands->prepend('Ninguna marca', '');
                 $formFields[] = [
                     'type' => 'select',
                     'name' => 'brand_id',
@@ -41,11 +42,22 @@ trait FormFieldsTrait
 
                 case 'categories':
                     $categories = Category::all()->pluck('name', 'id');
+                    $categories->prepend('Ninguna categoría', '');
                     $formFields[] = [
                         'type' => 'checkbox-group',
                         'name' => 'categories[]',
                         'label' => 'Categories',
                         'options' => $categories
+                    ];
+                    break;
+                case 'category':
+                    $category=Category::all()->pluck('name','id');
+                    $category->prepend('Ninguna categoría', '');
+                    $formFields[] = [
+                        'type' => 'select',
+                        'name' => 'parent_id',
+                        'label' => 'categories',
+                        'options' => $category
                     ];
                     break;
         }

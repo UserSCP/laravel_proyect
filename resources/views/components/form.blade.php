@@ -48,21 +48,24 @@
                     @enderror
 
                 @elseif ($field['type'] == 'checkbox-group'&&isset($object))
-                    <label>{{ $field['label'] }}</label>
+                    <label>{{ $field['label'] }}</label><br>
                     @foreach($field['options'] as $value => $label)
-                        <input type="checkbox" name="categories[]" value="{{ $value }}" {{ in_array($value, $object->categories->pluck('id')->toArray()) ? 'checked' : '' }}> {{ $label }}
-                    @endforeach
+                        <input type="checkbox" name="categories[]" value="{{ $value }}" {{ in_array($value, $object->categories->pluck('id')->toArray()) ? 'checked' : '' }}> {{ $label }}                   
+                        @endforeach
                 @elseif ($field['type'] == 'checkbox-group'&& !isset($object))
-                <label>{{ $field['label'] }}</label>
+                <label>{{ $field['label'] }}</label><br>
+                @php
+                    $selectedIds = old('categories', isset($object) ? $object->categories->pluck('id')->toArray() : []);
+                @endphp
                 @foreach($field['options'] as $value => $label)
-                    <input type="checkbox" name="{{ $field['name'] }}[]" value="{{ $value }}" 
-                        {{ in_array($value, old($field['name'], $object->{$field['name']}->pluck('id')->toArray() ?? [])) ? 'checked' : '' }}> 
-                    {{ $label }}
+                   
+                <input type="checkbox" name="categories[]" value="{{ $value }}" {{ in_array($value, $selectedIds) ? 'checked' : '' }}> {{ $label }}
+                
                 @endforeach
                 @endif
                 <br>
             @endforeach
-
+<br>
             <input type="submit" class="button button1" value="Submit">
         </form>
     </div>
