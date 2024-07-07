@@ -8,7 +8,7 @@
             <tr>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->price }}</td>
+                <td>{{ $product->price_with_tax  }}</td>
                 <td>{{ $product->brand_id }}</td>
                 <td>{{ $product->getCategoryNamesAttribute() }}</td>
                 <td>

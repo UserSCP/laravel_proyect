@@ -1,14 +1,17 @@
 <?php
 namespace App\Models;
 
-use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
+use function Pest\Laravel\get;
 
 class Product extends Model
 {
     use SoftDeletes;
+    use HasFactory;
+
     protected $table = 'products';
 
     protected $casts = [
@@ -19,7 +22,7 @@ class Product extends Model
  
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'product_category');
+        return $this->belongsToMany(Category::class, 'product_categories');
     }
     public function getCategoryNamesAttribute()
     {
@@ -30,6 +33,10 @@ class Product extends Model
     {
         return $this->belongsTo(Brand::class);
     }
-
+    public function getPriceWithTaxAttribute()
+    {
+        $price= $this->getAttribute('price');
+        return $price*1.8;
+    }
 
 }
