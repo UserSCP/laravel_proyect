@@ -21,14 +21,15 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class, 'product_category');
     }
+    public function getCategoryNamesAttribute()
+    {
+        return $this->categories->pluck('name')->implode(', ');
+    }
 
     public function brand()
     {
         return $this->belongsTo(Brand::class);
     }
 
-    public function getCategoryNamesAttribute()
-    {
-        return $this->categories->pluck('name')->implode(' - ');
-    }
+
 }
