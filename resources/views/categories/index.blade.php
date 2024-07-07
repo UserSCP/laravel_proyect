@@ -1,22 +1,19 @@
 @extends('layouts.layout')
-@section('bottun','Subir Prodcuto')
-@section('title', 'Tabla Categorias')
+@section('button','Subir Categoría')
+@section('title', 'Tabla Categorías')
 
 @section('content')
-    @component('components.table', ['route' => route('categories.create')])
-    @slot('components.table')
-        @foreach ($categories as $categorie)
+    <x-table :columns="['ID','Name','Parent_id']" :route="route('categories.create')">
+        @foreach ($categories as $cate)
             <tr>
-                <td>{{ $categorie->id }}</td>
-                <td>{{ $categorie->parent_id }}</td>
-                <td>{{ $categorie->name }}</td>
+                <td>{{ $cate->id }}</td>
+                <td>{{ $cate->name }}</td>
+                <td>{{ $cate->parent_id }}</td>
                 <td>
-                    <a href="{{ route('categories.edit', $categorie) }}">
-                        <button class="button button2">Editar</button>
-                    </a>
+                    <a href="{{ route('categories.edit', $cate) }}"><button class="button button2">Editar</button></a>
                 </td>
                 <td>
-                    <form action="{{ route('categories.destroy', $categorie) }}" method="POST">
+                    <form action="{{ route('categories.destroy', $cate) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="button button3">Eliminar</button>
@@ -24,8 +21,9 @@
                 </td>
             </tr>
         @endforeach
-    @endcomponent
+    </x-table>
 @endsection
+
 @push('styles')
 <link href="{{ asset('css/table.css') }}" rel="stylesheet">
 @endpush
