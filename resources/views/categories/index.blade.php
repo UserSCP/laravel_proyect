@@ -22,6 +22,8 @@
             </tr>
         @endforeach
     </x-table>
+    <br>
+    {{ $categories->links('pagination::default') }}
 @endsection
 
 @push('styles')

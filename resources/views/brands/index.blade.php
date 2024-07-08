@@ -21,6 +21,8 @@
             </tr>        
         @endforeach
     </x-table>
+    <br>
+            {{ $brands->links('pagination::default') }}
 @endsection
 
 @push('styles')

@@ -27,7 +27,6 @@ class Brand extends Model
 	use SoftDeletes;
 	use HasFactory;
 	protected $table = 'brands';
-
 	protected $fillable = [
 		'name'
 	];
@@ -35,4 +34,5 @@ class Brand extends Model
     {
         return $this->hasMany(Product::class);
     }
+
 }

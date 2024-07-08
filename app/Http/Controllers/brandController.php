@@ -14,8 +14,8 @@ class BrandController extends Controller
     public function index()
     {
         try {
-            $brands = Brand::all();
             $route = route('brands.create');
+            $brands=  Brand::paginate(5);
             return view('brands.index', compact('brands', 'route'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.brand.load_error', ['error' => $e->getMessage()]));

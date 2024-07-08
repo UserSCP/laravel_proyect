@@ -16,7 +16,7 @@ class ProductsController extends Controller
     public function index()
     {
         try {
-            $products = Product::with('categories', 'brand')->get();
+            $products = Product::with('categories', 'brand')->paginate(5);
             $route = route('products.create');
             return view('products.index', compact('products', 'route'));
         } catch (Exception $e) {

@@ -49,3 +49,10 @@ ul.sticky {
   position: sticky;
   top: 0;
 }
+.content-pagination{
+  margin-top: 20px;
+    text-align: center;
+}
+.pagination{
+  text-align: center;
+}
