@@ -1,7 +1,7 @@
 @props(['route', 'title', 'fields', 'object' => null])
-
+<div style="margin-left:20px">
 <h2 style="text-align: center">{{ $title }}</h2>
-
+</div>
 @if ($errors->any())
     <div class="container">
         @foreach ($errors->all() as $error)
@@ -68,5 +68,4 @@
 <br>
             <input type="submit" class="button button1" value="Submit">
         </form>
-    </div>
-</div>
+    

@@ -127,3 +127,31 @@ html,body {
 .is-invalid {
   border-color: #dc3545;
 }
+.select {
+  max-width: 700px;
+  padding: 12px 12px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.filter-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px; 
+}
+
+.filter-container form {
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.pagination-container {
+  margin-top: 20px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+}

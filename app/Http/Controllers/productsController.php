@@ -3,8 +3,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Brand;
-use App\Models\Category;
 use App\Http\Requests\ProductRequest;
 use Exception;
 use App\Traits\FormFieldsTrait;
@@ -13,12 +11,17 @@ class ProductsController extends Controller
 {
     use FormFieldsTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $products = Product::with('categories', 'brand')->paginate(5);
-            $route = route('products.create');
-            return view('products.index', compact('products', 'route'));
+            $query = Product::with('categories', 'brand');
+        if ($request->has('sort_price')) {
+            $query->orderBy('price', $request->get('sort_price'));
+        }
+        $products = $query->paginate(5);
+        $route = route('products.create');
+
+        return view('products.index', compact('products', 'route'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.product.load_error', ['error' => $e->getMessage()]));
         }
