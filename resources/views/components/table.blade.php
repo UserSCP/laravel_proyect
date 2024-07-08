@@ -22,7 +22,6 @@
             </div>
         @endif
     @endforeach
-    <br>
     <table class="table">
         <thead>
             <tr>
