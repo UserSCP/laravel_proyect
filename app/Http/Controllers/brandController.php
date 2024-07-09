@@ -1,5 +1,6 @@
 <?php 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
@@ -11,12 +12,17 @@ class BrandController extends Controller
 {
     use FormFieldsTrait;
 
-    public function index()
+    public function index(Request $request)
     {
         try {
-            $route = route('brands.create');
-            $brands=  Brand::paginate(5);
-            return view('brands.index', compact('brands', 'route'));
+            $query= Brand::query();
+            if ($request->has('sort_name')) {
+            $query->orderBy('name', $request->get('sort_name'));
+        }
+        $brands = $query->paginate(5);
+        $route = route('brands.create');
+
+        return view('brands.index', compact('brands', 'route'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.brand.load_error', ['error' => $e->getMessage()]));
         }
