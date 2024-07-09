@@ -25,4 +25,12 @@ th {
     text-align: left;
     background-color: #04AA6D;
     color: white;
-}
+}select {
+    max-width: 700px;
+    padding: 12px 12px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }

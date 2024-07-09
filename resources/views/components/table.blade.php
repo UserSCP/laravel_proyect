@@ -1,4 +1,4 @@
-<div>
+<div style="margin-left: 20px; margin-right:20px;">
     <br>
     <a href="{{ $route }}"><button class="button button1">@yield('button')</button></a>
     <h3>

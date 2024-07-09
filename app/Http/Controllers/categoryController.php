@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
@@ -9,12 +10,19 @@ use App\Traits\FormFieldsTrait;
 class categoryController extends Controller
 {
     use FormFieldsTrait;
-    public function index()
+    public function index(Request $request)
     {
         try{
-        $categories=Category::paginate(5);
-        $route=route('categories.create');
-        return view('categories.index', compact('categories','route'));
+            $query = Category::query();
+            if ($request->has('parent_id') && $request->parent_id != '') {
+                $query->where('parent_id', $request->parent_id);
+            } else {
+                $query->whereHas('children');
+            }
+            $categories = $query->paginate(5);
+            $parentCategories = Category::whereHas('children')->pluck('name', 'id');
+            $route = route('categories.create');
+            return view('categories.index', compact('categories', 'route', 'parentCategories'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.category.load_error',['error'=>$e->getMessage()]));
         }

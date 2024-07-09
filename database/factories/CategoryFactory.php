@@ -13,10 +13,11 @@ class CategoryFactory extends Factory
     protected $model = Category::class;
     public function definition(): array
     {
-        $parentId = Category::inRandomOrder()->first()?->id ?? 1;
+        $randomCategory = Category::inRandomOrder()->first();
+        
         return [
-            'name'=>fake()->unique()->word(),
-            'parent_id' => $parentId,
+            'name' => $this->faker->unique()->word(),
+            'parent_id' => $randomCategory ? $randomCategory->id : null,
         ];
     }
 }
