@@ -12,15 +12,13 @@ class Form extends Component
     public $title;
     public $fields;
     public $buttonSubmit;
-    public $mode;
 
-    public function __construct($route, $title, $fields, $buttonSubmit, $mode)
+    public function __construct($route, $title, $fields, $buttonSubmit)
     {
         $this->route = $route;
         $this->title = $title;
         $this->fields = $fields;
         $this->buttonSubmit = $buttonSubmit;
-        $this->$mode=$mode;
     }
     
 

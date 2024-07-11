@@ -1,7 +1,4 @@
 @extends('layouts.app')
-
-@section('title', 'Lista de Productos')
-
 @section('content')
 
     @include('products.partials._alert')

@@ -1,4 +1,4 @@
-@props(['route', 'title', 'fields', 'object' => null, 'buttonSubmit', 'mode'])
+@props(['route', 'title', 'fields', 'object' => null, 'buttonSubmit'])
 
 <div style="margin-left:20px">
     <h2 style="text-align: center">{{ $title }}</h2>

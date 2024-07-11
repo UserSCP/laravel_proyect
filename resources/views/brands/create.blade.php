@@ -1,12 +1,9 @@
 @extends('layouts.app')
-
-@section('title', 'Crear Marca')
-
-
 @section('content')
-<x-form :route="route('brands.store')" title="Crear Marca" :fields="$fields" />
+    <x-form :route="route('brands.store')" title="Crear Marca" :fields="$fields" buttonSubmit="Crear Marca" />
 @endsection
 
 @push('styles')
     <link href="{{ asset('css/form.css') }}" rel="stylesheet">
 @endpush
+
