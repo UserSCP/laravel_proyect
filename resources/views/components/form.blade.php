@@ -1,8 +1,5 @@
 @props(['route', 'title', 'fields', 'object' => null, 'buttonSubmit'])
 
-<div style="margin-left:20px">
-    <h2 style="text-align: center">{{ $title }}</h2>
-</div>
 
 @if ($errors->any())
     <div class="container">
@@ -16,8 +13,12 @@
     </div>
 @endif
 
-<div class="container">
+<div class="container" style="margin-top: 20px">
     <div class="div">
+        <div style="">
+            <h2 style="">{{ $title }}</h2>
+        </div>
+        
         <form action="{{ $route }}" method="POST" class="">
             @csrf
             @if (isset($object))
@@ -49,7 +50,7 @@
                     @enderror
 
                 @elseif ($field['type'] == 'checkbox-group')
-                    <label>{{ $field['label'] }}</label><br>
+                    <label>{{ $field['label'] }}</label><br><br>
                     @php
                         $selectedIds = old('categories', isset($object) ? $object->categories->pluck('id')->toArray() : []);
                     @endphp
@@ -59,7 +60,7 @@
                 @endif
                 <br>
             @endforeach
-            <br>
+            <br><br><br>
             <div class="form-group">
                 <button type="submit" class="{{ request()->routeIs('products.create', 'categories.create', 'brands.create') ? 'button button1' : 'button button2' }}">{{ $buttonSubmit }}</button>
             </div>
