@@ -1,9 +1,6 @@
-@extends('layouts.layout')
-
-@section('title', 'Crear Producto')
-
+@extends('layouts.app')
 @section('content')
-    <x-form :route="route('products.store')" title="Crear Producto" :fields="$fields" />
+    <x-form :route="route('products.store')" title="Crear Producto" :fields="$fields" buttonSubmit="Crear Producto" />
 @endsection
 
 @push('styles')

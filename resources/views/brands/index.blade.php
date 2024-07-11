@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.app')
 @section('button','Subir Marca')
 @section('title', 'Tabla Marca')
 

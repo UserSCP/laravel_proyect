@@ -8,13 +8,21 @@ use Illuminate\View\Component;
 
 class Form extends Component
 {
-    /**
-     * Create a new component instance.
-     */
-    public function __construct()
+    public $route;
+    public $title;
+    public $fields;
+    public $buttonSubmit;
+    public $mode;
+
+    public function __construct($route, $title, $fields, $buttonSubmit, $mode)
     {
-        //
+        $this->route = $route;
+        $this->title = $title;
+        $this->fields = $fields;
+        $this->buttonSubmit = $buttonSubmit;
+        $this->$mode=$mode;
     }
+    
 
     /**
      * Get the view / contents that represent the component.

@@ -44,7 +44,6 @@ class ProductsController extends Controller
             'brand_id' => $validated['brand_id'],
         ]);
 
-        // Sincroniza las categorías
         $product->categories()->sync($request->input('categories', []));
         $product->save();
 
@@ -64,8 +63,6 @@ public function update(ProductRequest $request, Product $product)
             'price' => $validated['price'],
             'brand_id' => $validated['brand_id'],
         ]);
-
-        // Sincroniza las categorías
         $product->categories()->sync($request->input('categories', []));
         $product->save();
 
@@ -77,15 +74,20 @@ public function update(ProductRequest $request, Product $product)
 
 
     
-    public function edit(Product $product)
-    {
-        try {
-            $fields = $this->getFormFields(['name', 'price', 'brand_id', 'categories']);
-            return view('products.edit', compact('product', 'fields'));
-        } catch (Exception $e) {
-            return redirect()->back()->with('error', __('messages.product.load_error', ['error' => $e->getMessage()]));
+public function edit(Product $product)
+{
+    try {
+        $fields = $this->getFormFields(['name', 'price', 'brand_id', 'categories']);
+        
+        foreach ($fields as &$field) {
+            $field['value'] = $product->{$field['name']} ?? '';
         }
+
+        return view('products.edit', compact('product', 'fields'));
+    } catch (Exception $e) {
+        return redirect()->back()->with('error', __('messages.product.load_error', ['error' => $e->getMessage()]));
     }
+}
 
     public function destroy(Product $product)
     {

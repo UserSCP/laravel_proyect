@@ -9,7 +9,7 @@
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
 </head>
 <body>
-    @include('layouts.header')
+    @include('layouts.navbar')
     <div class="container mt-4">
         <h1>Bienvenido a Laravel</h1>
         @if (session('error'))

@@ -1,29 +1,29 @@
-@extends('layouts.layout')
-@section('button', 'Subir Producto')
-@section('title', 'Tabla Productos')
+@extends('layouts.app')
+
+@section('title', 'Lista de Productos')
 
 @section('content')
-    <x-table :columns="['ID', 'Name', 'Price', 'Brand_id', 'Categories']" :route="route('products.create')">
-        <div class="filter-container">
-            <form method="GET" action="{{ route('products.index') }}">
-                <label for="sort_price">Ordenar por precio:</label>
-                <select name="sort_price" id="sort_price" class="select" onchange="this.form.submit()">
-                    <option value="" {{ request('sort_price') == '' ? 'selected' : '' }}>Seleccione una opción</option>
-                    <option value="asc" {{ request('sort_price') == 'asc' ? 'selected' : '' }}>Menor a mayor</option>
-                    <option value="desc" {{ request('sort_price') == 'desc' ? 'selected' : '' }}>Mayor a menor</option>
-                </select>
-            </form>
-        </div>
 
+    @include('products.partials._alert')
+
+    <div class="d-flex justify-content-between mb-3" style="margin-left: 20px">
+        <h1> Lista de Productos</h1>
+    </div>
+    <div class="filter-container">
+   <a href="{{ route('products.create') }}" style="max-width:150px;margin-left: 20px;" class="button button1">Agregar Producto</a>
+   @include('products.partials._filter')    
+</div>
+
+    <x-table :columns="['ID', 'Nombre', 'Precio', 'Marca', 'Categorías']" :route="route('products.create')">
         @foreach ($products as $product)
             <tr>
                 <td>{{ $product->id }}</td>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->price_with_tax }}</td>
-                <td>{{ $product->brand_id }}</td>
+                <td>{{ $product->price }}</td>
+                <td>{{ $product->brand->name }}</td>
                 <td>{{ $product->getCategoryNamesAttribute() }}</td>
-                <td>
-                    <a href="{{ route('products.edit', $product) }}"><button class="button button2">Editar</button></a>
+                <td >
+                    <a href="{{ route('products.edit', $product) }}" class="button button2">Editar</a>
                 </td>
                 <td>
                     <form action="{{ route('products.destroy', $product) }}" method="POST">
@@ -34,14 +34,10 @@
                 </td>
             </tr>
         @endforeach
-
-        
     </x-table>
-    <div class="pagination-container " style="margin-bottom: 20px">
-        {{ $products->links('pagination::bootstrap-4') }}
-    </div>
-@endsection
-
+    <br>
+    {{ $products->links('pagination::bootstrap-4') }}
+    @endsection
 @push('styles')
-    <link href="{{ asset('css/table.css') }}" rel="stylesheet">
+<link href="{{ asset('css/table.css') }}" rel="stylesheet">
 @endpush
