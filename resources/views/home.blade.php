@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Bienvenido</title>
+    <title>Laravel App</title>
+    <link rel="icon" href="{{ asset('icon2.png') }}" type="image/x-icon">
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navbar.css') }}" rel="stylesheet">
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
