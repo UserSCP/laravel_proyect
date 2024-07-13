@@ -27,5 +27,6 @@ return[
         'update_error' => 'Error updating category: :error',
         'delete_error' => 'Error deleting category: :error',
     ],
+    
 
 ];

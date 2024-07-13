@@ -30,7 +30,7 @@
                     <input type="text" name="{{ $field['name'] }}" id="{{ $field['name'] }}"
                            class="form-control @error($field['name']) is-invalid @enderror"
                            value="{{ old($field['name'], $object->{$field['name']} ?? '') }}"
-                           autocomplete="off">
+                           autocomplete="off" placeholder="{{ $field['placeholder'] }}">
                     @error($field['name'])
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror

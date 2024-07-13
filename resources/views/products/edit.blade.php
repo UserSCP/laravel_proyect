@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <x-form :route="route('products.update', $product)" title="Actualizar Producto" :fields="$fields" :object="$product" buttonSubmit="Actualizar Producto" />
+    <x-form :route="route('products.update', $product)" title="{{ __('fields.forms.product.edit.title') }}" :fields="$fields" :object="$product" buttonSubmit="{{ __('fields.forms.product.edit.submit') }}" />
 @endsection
 
 @push('styles')

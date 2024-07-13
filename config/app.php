@@ -11,11 +11,11 @@ return [
 
 'timezone' => env('APP_TIMEZONE', 'UTC'),
 
-'locale' => 'es',
+'locale' => env('APP_LOCALE'),
 
-'fallback_locale' => env('APP_FALLBACK_LOCALE', 'es'),
+'fallback_locale' => env('APP_FALLBACK_LOCALE'),
 
-'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+'faker_locale' => env('APP_FAKER_LOCALE'),
 
 'cipher' => 'AES-256-CBC',
 
