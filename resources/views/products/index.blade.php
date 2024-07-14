@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
-    @include('products.partials._alert')
+@include('partials._breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+
+    @include('partials._alert')
 
     <div class="d-flex justify-content-between mb-3" style="margin-left: 20px">
         <h1>{{ __('fields.table.product.title') }}</h1>

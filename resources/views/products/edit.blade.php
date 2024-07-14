@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@include('partials._breadcrumbs')
     <x-form :route="route('products.update', $product)" title="{{ __('fields.forms.product.edit.title') }}" :fields="$fields" :object="$product" buttonSubmit="{{ __('fields.forms.product.edit.submit') }}" />
 @endsection
 

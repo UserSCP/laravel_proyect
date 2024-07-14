@@ -13,15 +13,20 @@ class ProductsController extends Controller
 
     public function index(Request $request)
     {
-        try {
-            $query = Product::with('categories', 'brand');
-        if ($request->has('sort_price')) {
-            $query->orderBy('price', $request->get('sort_price'));
+        try {  $breadcrumbs = [
+            ['name' => __('fields.navbar.home'), 'url' => route('home')],
+            ['name' => __('fields.navbar.option1'), 'url' => route('products.index')],
+        ];
+        $query = Product::with('categories', 'brand');
+            if ($request->has('sort_price')) {
+            $sortPrice = $request->get('sort_price');
+            $query->orderBy('price', $sortPrice);
+                $breadcrumbs[] = ['name' =>  __('fields.table.orderly') . ($sortPrice == 'asc' ? __('fields.table.product.filter_price.option.option2') : __('fields.table.product.filter_price.option.option1')), 'url' => route('products.index', ['sort_price' => $sortPrice])];
         }
+    
         $products = $query->paginate(5);
         $route = route('products.create');
-
-        return view('products.index', compact('products', 'route'));
+        return view('products.index', compact('products', 'route','breadcrumbs'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.product.load_error', ['error' => $e->getMessage()]));
         }
@@ -29,8 +34,13 @@ class ProductsController extends Controller
 
     public function create()
     {
+        $breadcrumbs = [
+            ['name' => __('fields.navbar.home'), 'url' => route('home')],
+            ['name' => __('fields.navbar.option1'), 'url' => route('products.index')],
+            ['name'=>__('fields.table.create'),'url'=>route('products.create')],
+        ];
         $fields = $this->getFormFields(['name', 'price', 'brand_id', 'categories']);
-        return view('products.create', compact('fields'));
+        return view('products.create', compact('fields','breadcrumbs'));
     }
 
     public function store(ProductRequest $request)
@@ -77,13 +87,18 @@ public function update(ProductRequest $request, Product $product)
 public function edit(Product $product)
 {
     try {
+        $breadcrumbs = [
+            ['name' => __('fields.navbar.home'), 'url' => route('home')],
+            ['name' => __('fields.navbar.option1'), 'url' => route('products.index')],
+            ['name' => __('fields.table.edit'), 'url' => route('products.edit', $product->id)],
+        ];
         $fields = $this->getFormFields(['name', 'price', 'brand_id', 'categories']);
         
         foreach ($fields as &$field) {
             $field['value'] = $product->{$field['name']} ?? '';
         }
 
-        return view('products.edit', compact('product', 'fields'));
+        return view('products.edit', compact('product', 'fields','breadcrumbs'));
     } catch (Exception $e) {
         return redirect()->back()->with('error', __('messages.product.load_error', ['error' => $e->getMessage()]));
     }

@@ -1,4 +1,3 @@
-<br>
 @php
     $alerts = [
         'delete' => 'alert1',

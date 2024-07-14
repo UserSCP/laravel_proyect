@@ -1,6 +1,6 @@
 @props(['route', 'title', 'fields', 'object' => null, 'buttonSubmit'])
 
-
+<br>
 @if ($errors->any())
     <div class="container">
         @foreach ($errors->all() as $error)
@@ -13,7 +13,7 @@
     </div>
 @endif
 
-<div class="container" style="margin-top: 20px">
+<div class="container" >
     <div class="div">
         <div style="">
             <h2 style="">{{ $title }}</h2>

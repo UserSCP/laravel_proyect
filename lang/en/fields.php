@@ -101,6 +101,8 @@ return [
         'option3' => 'Brands',
     ],
     'table' => [
+        'create'=>'Create',
+        'orderly'=>'Orderly: ',
         'thead'=>[
             'name'=>'Name',
             'price'=>'Price',

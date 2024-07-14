@@ -103,6 +103,8 @@ return [
         'option3' => 'ブランド',
     ],
     'table' => [
+        'orderly'=>'秩序ある: ',
+        'create'=>'作成する',
         'thead' => [
             'name' => '名前',
             'price' => '価格',

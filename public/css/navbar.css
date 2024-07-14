@@ -2,12 +2,14 @@ body {
   margin: 0;
   padding: 0;
 }
-
+ol{
+  list-style-type:none;
+  margin:0;
+}
 ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  overflow:auto;
   border: 1px solid #e7e7e7;
   background-color: #f3f3f3;
 }
@@ -18,7 +20,6 @@ ul {
   border: 1px solid #e7e7e7;
   background-color: #f3f3f3;
   position: -webkit-sticky;
-  position: sticky;
   top: 0;
 }
 
@@ -26,11 +27,19 @@ li {
   float: left;
 }
 
-li a {
+.navbar-fix a {
   display: block;
   color: #666;
   text-align: center;
   padding: 14px 16px;
+  text-decoration: none;
+}
+.fix-all a{
+  display:inline;
+  color: #666;
+  text-align: center;
+  padding: 14px 16px;
+  list-style-type:none;
   text-decoration: none;
 }
 
@@ -46,7 +55,6 @@ a.active {
 ul.sticky {
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
 }
 .content-pagination{
   margin-top: 20px;

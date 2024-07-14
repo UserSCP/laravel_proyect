@@ -90,6 +90,8 @@ return [
         'option3' => 'Marcas',
     ],
     'table' => [
+        'create'=>'Crear',
+        'orderly'=>'Ordenado: ',
         'thead'=>[
             'name'=>'Nombre',
             'price'=>'Precio',
