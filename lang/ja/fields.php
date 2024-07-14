@@ -104,6 +104,7 @@ return [
     ],
     'table' => [
         'orderly'=>'秩序ある: ',
+        'relation'=>'関係: ',
         'create'=>'作成する',
         'thead' => [
             'name' => '名前',

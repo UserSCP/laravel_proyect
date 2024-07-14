@@ -92,6 +92,7 @@ return [
     'table' => [
         'create'=>'Crear',
         'orderly'=>'Ordenado: ',
+        'relation'=>'Relacionado con: ',
         'thead'=>[
             'name'=>'Nombre',
             'price'=>'Precio',

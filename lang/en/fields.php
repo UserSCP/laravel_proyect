@@ -103,6 +103,7 @@ return [
     'table' => [
         'create'=>'Create',
         'orderly'=>'Orderly: ',
+        'relation'=>'Relationship to: ',
         'thead'=>[
             'name'=>'Name',
             'price'=>'Price',

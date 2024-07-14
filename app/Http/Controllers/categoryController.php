@@ -13,24 +13,41 @@ class categoryController extends Controller
     public function index(Request $request)
     {
         try{
+            $breadcrumbs = [
+                ['name' => __('fields.navbar.home'), 'url' => route('home')],
+                ['name' => __('fields.navbar.option2'), 'url' => route('categories.index')],
+            ];
             $query = Category::query();
             if ($request->has('parent_id') && $request->parent_id != '') {
                 $query->where('parent_id', $request->parent_id);
+                $parentCategory = Category::find($request->parent_id);
+                if ($parentCategory) {
+                    $breadcrumbs[] = ['name' => __('fields.table.relation').$parentCategory->name, 'url' => route('categories.index', ['parent_id' => $request->parent_id])];
+                }
             } else {
                 $query->whereHas('children');
             }
+        
             $categories = $query->paginate(5);
             $parentCategories = Category::whereHas('children')->pluck('name', 'id');
             $route = route('categories.create');
-            return view('categories.index', compact('categories', 'route', 'parentCategories'));
+        
+            return view('categories.index', compact('categories', 'route', 'parentCategories', 'breadcrumbs'));
+        
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.category.load_error',['error'=>$e->getMessage()]));
         }
     }
     public function create()
     {
+        $breadcrumbs = [
+            ['name' => __('fields.navbar.home'), 'url' => route('home')],
+            ['name' => __('fields.navbar.option2'), 'url' => route('categories.index')],
+            ['name' => __('fields.table.create'), 'url' => route('categories.create')],
+
+        ];
         $fields= $this->getFormFields(['name','category']);
-        return view('categories.create',compact('fields'));
+        return view('categories.create',compact('fields','breadcrumbs'));
     }
     public function store(CategoryRequest $request)
     {
@@ -64,8 +81,14 @@ class categoryController extends Controller
     public function edit(Category $category)
     {
         try{
+            $breadcrumbs = [
+                ['name' => __('fields.navbar.home'), 'url' => route('home')],
+                ['name' => __('fields.navbar.option2'), 'url' => route('categories.index')],
+                ['name' => __('fields.table.edit'), 'url' => route('categories.edit',$category->id)],
+    
+            ];
             $fields= $this->getFormFields(['name','category']);
-        return view('categories.edit', compact('category','fields'));
+        return view('categories.edit', compact('category','fields','breadcrumbs'));
         }catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.category.load_error',['error'=>$e->getMessage()]));
         }

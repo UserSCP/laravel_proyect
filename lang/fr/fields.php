@@ -101,6 +101,7 @@ return [
     ],
     'table' => [
         'create'=>'créer',
+        'relation'=>'Relation avec: ',
         'orderly'=>'Ordonné: ',
         'thead'=>[
             'name'=>'Nom',

@@ -15,23 +15,35 @@ class BrandController extends Controller
     public function index(Request $request)
     {
         try {
+            $breadcrumbs = [
+                ['name' => __('fields.navbar.home'), 'url' => route('home')],
+                ['name' => __('fields.navbar.option3'), 'url' => route('brands.index')],
+            ];
             $query= Brand::query();
             if ($request->has('sort_name')) {
-            $query->orderBy('name', $request->get('sort_name'));
+            $sortName = $request->get('sort_name');
+            $query->orderBy('name', $sortName);
+                $breadcrumbs[] = ['name' =>  __('fields.table.orderly') . ($sortName == 'asc' ? __('fields.table.brand.filter_alfa.option.option1') : __('fields.table.brand.filter_alfa.option.option2')), 'url' => route('brands.index', ['sort_name' => $sortName])];
+        
         }
         $brands = $query->paginate(5);
         $route = route('brands.create');
 
-        return view('brands.index', compact('brands', 'route'));
+        return view('brands.index', compact('brands', 'route','breadcrumbs'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.brand.load_error', ['error' => $e->getMessage()]));
         }
+        
     }
-
     public function create()
     {
         $fields = $this->getFormFields(['name']);
-        return view('brands.create', compact('fields'));
+        $breadcrumbs = [
+            ['name' => __('fields.navbar.home'), 'url' => route('home')],
+            ['name' => __('fields.navbar.option3'), 'url' => route('brands.index')],
+            ['name'=>__('fields.table.create'),'url'=>route('brands.create')]
+        ];
+        return view('brands.create', compact('fields','breadcrumbs'));
     }
 
     public function store(BrandRequest $request)
@@ -50,9 +62,13 @@ class BrandController extends Controller
     public function edit(Brand $brand)
     {
         try {
-            Log::info('Intentando editar la marca: ' . $brand->name);
+            $breadcrumbs = [
+                ['name' => __('fields.navbar.home'), 'url' => route('home')],
+                ['name' => __('fields.navbar.option3'), 'url' => route('brands.index')],
+                ['name'=>__('fields.table.edit'),'url'=>route('brands.edit',$brand->id)]
+            ];
             $fields = $this->getFormFields(['name']);
-            return view('brands.edit', compact('brand', 'fields'));
+            return view('brands.edit', compact('brand', 'fields','breadcrumbs'));
         } catch (Exception $e) {
             return redirect()->back()->with('error', __('messages.brand.load_error', ['error' => $e->getMessage()]));
         }
